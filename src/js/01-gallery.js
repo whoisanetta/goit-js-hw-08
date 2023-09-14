@@ -42,8 +42,10 @@ function handleProductClick(event) {
   const photoPrev = targetElement.dataset.preview;
   const photoInfo = galleryItems.find(photo => photo.preview === photoPrev);
 
-  var lightbox = new SimpleLightbox('.gallery a', {
-    /* options */
+  new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionDelay: 250,
   });
 }
+
 console.log(galleryItems);
