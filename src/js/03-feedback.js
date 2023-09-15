@@ -76,21 +76,20 @@ const LS_KEY = 'feedback-form-state';
 let feedbackFormStateObj = {};
 
 const form = document.querySelector('.feedback-form');
-const btn = document.querySelector('.btn');
 
 // const feedbackFormStateParsedJSON = JSON.parse(localStorage.getItem(LS_KEY));
 const feedbackFormStateJSON = localStorage.getItem(LS_KEY);
 // console.log(feedbackFormStateJSON);
 let feedbackFormStateParsedJSON = JSON.parse(feedbackFormStateJSON);
-console.log(feedbackFormStateParsedJSON);
+// console.log(feedbackFormStateParsedJSON);
 
 if (feedbackFormStateParsedJSON) {
   const feedbackFormStateEntries = Object.entries(feedbackFormStateParsedJSON);
-  console.log('entries: ', feedbackFormStateEntries);
+  // console.log('entries: ', feedbackFormStateEntries);
 
   feedbackFormStateEntries.forEach(array => {
     const [key, value] = array;
-    console.log(key, value);
+    // console.log(key, value);
 
     document.querySelector(`[name='${key}']`).value = value;
   });
@@ -128,7 +127,21 @@ form.addEventListener('input', event => {
   localStorage.setItem(LS_KEY, feedbackFormStateObjStringified);
 });
 
-form.addEventListener('submit', event => {
-  event.preventDefault();
-  console.log('aaa');
-});
+form.addEventListener(
+  'submit',
+  throttle(event => {
+    event.preventDefault();
+
+    localStorage.removeItem(LS_KEY);
+
+    const feedbackFormStateEntries = Object.entries(
+      feedbackFormStateParsedJSON
+    );
+    feedbackFormStateEntries.forEach(array => {
+      const [key, value] = array;
+      if (value) document.querySelector(`[name='${key}']`).value = '';
+    });
+
+    console.log(feedbackFormStateParsedJSON);
+  }, 2000)
+);
