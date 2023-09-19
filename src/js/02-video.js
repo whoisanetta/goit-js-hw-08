@@ -16,13 +16,9 @@ player.on('timeupdate', function (event) {
   saveCurrentTimeThrottled(currentPlayerTime);
 });
 
-window.addEventListener('DOMContentLoaded', async () => {
+window.addEventListener('load', () => {
   const currentTime = localStorage.getItem('videoplayer-current-time');
   if (currentTime) {
-    try {
-      await player.setCurrentTime(parseFloat(currentTime));
-    } catch (error) {
-      console.error('Помилка при встановленні часу відтворення:', error);
-    }
+    player.setCurrentTime(parseFloat(currentTime));
   }
 });
