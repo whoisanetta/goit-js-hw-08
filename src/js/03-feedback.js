@@ -56,7 +56,7 @@ form.addEventListener(
     const feedbackFormStateObjStringified =
       JSON.stringify(feedbackFormStateObj);
     localStorage.setItem(LS_KEY, feedbackFormStateObjStringified);
-  }, 2000)
+  }, 500)
 );
 
 form.addEventListener('submit', event => {

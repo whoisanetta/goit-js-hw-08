@@ -11,7 +11,6 @@ const container = document.querySelector('.gallery');
 const markup = createMarkup(galleryItems);
 
 container.insertAdjacentHTML('beforeend', markup);
-container.addEventListener('click', handleProductClick);
 
 function createMarkup(arr) {
   return arr
@@ -31,21 +30,7 @@ function createMarkup(arr) {
     .join('');
 }
 
-function handleProductClick(event) {
-  event.preventDefault();
-
-  if (event.target === event.currentTarget) {
-    return;
-  }
-
-  const targetElement = event.target.closest('.js-gallery-item');
-  const photoPrev = targetElement.dataset.preview;
-  const photoInfo = galleryItems.find(photo => photo.preview === photoPrev);
-
-  new SimpleLightbox('.gallery a', {
-    captionsData: 'alt',
-    captionDelay: 250,
-  });
-}
-
-console.log(galleryItems);
+const gallery = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
