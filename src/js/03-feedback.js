@@ -30,7 +30,6 @@ form.addEventListener(
     const name = event.target.name;
     const text = event.target.value;
     feedbackFormStateObj[`${name}`] = text;
-    console.log(feedbackFormStateObj);
 
     //   const name = event.target.name;
     //   const text = event.target.value;
@@ -71,4 +70,6 @@ form.addEventListener('submit', event => {
   });
 
   console.log(feedbackFormStateObj);
+
+  feedbackFormStateObj = {};
 });
